@@ -1,1 +1,58 @@
+Q)THE LOGIC OF SQL ATTACK?
+=How a Normal Login Works
+Suppose a login page has:
+Username: _______
+Password: _______
+The developer writes:
+SELECT * FROM users
+WHERE username='USER'
+AND password='PASS';
+Example:
+Username = jarvis
+Password = 1234
+SQL becomes:
+SELECT * FROM users
+WHERE username='jarvis'
+AND password='1234';
+If both match the database,
 
+Where is the Mistake?
+
+The developer directly inserts user input into the SQL query.
+
+Example (PHP):
+
+$query = "SELECT * FROM users
+WHERE username='" . $_POST["user"] . "'
+AND password='" . $_POST["password"] . "'";
+This is called string concatenation.
+
+What Does the Attacker Do?
+Instead of entering a username,
+the attacker enters:
+' OR 1=1-- -
+Password:
+(blank)
+Now SQL becomes:
+SELECT *
+FROM users
+WHERE username=''
+OR 1=1-- -
+AND password='';
+here OR means 
+Either condition A
+OR
+condition B
+If one condition is TRUE,
+the whole statement becomes TRUE.
+
+--
+Double dash starts a SQL comment.
+Everything after it is ignored.
+Example:
+SELECT *
+FROM users
+WHERE username=''
+OR 1=1
+-- password check ignored
+Password verification disappears.
