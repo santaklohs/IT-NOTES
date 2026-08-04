@@ -15,18 +15,13 @@ SELECT * FROM users
 WHERE username='jarvis'
 AND password='1234';
 If both match the database,
-
 Where is the Mistake?
-
 The developer directly inserts user input into the SQL query.
-
 Example (PHP):
-
 $query = "SELECT * FROM users
 WHERE username='" . $_POST["user"] . "'
 AND password='" . $_POST["password"] . "'";
 This is called string concatenation.
-
 What Does the Attacker Do?
 Instead of entering a username,
 the attacker enters:
